@@ -1,1 +1,1 @@
-# HireNXT-Vendor-API
+# HireNXT-API
