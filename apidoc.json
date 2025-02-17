@@ -1,0 +1,8 @@
+{
+    "name": "VirMall Rest API documentation",
+    "version": "1.0.0",
+    "description": "Containes virmall rest api path",
+    "title": "VirMall",
+    "url" : "http://localhost:3000",
+    "showRequiredLabels": true
+  }
