@@ -21,7 +21,7 @@ export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextF
             if(bearer[0] != process.env.TOKEN_TYPE) {
                 throw new Error('not_authroized_token');
             }
-
+            console.log("test");
             const user: any = await new TokenUtil().verifyToken(token);
             // req.user = await AuthMiddleware._authUtil.getUserDetail(user.id);
             req.user = user;
