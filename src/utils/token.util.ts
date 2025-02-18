@@ -2,7 +2,7 @@ import { IPayload, IUser } from "@models";
 import { Device } from "core/enum-types";
 import { Jwt, JwtPayload, SignOptions, VerifyOptions, sign, verify } from "jsonwebtoken";
 
-export class TokenUtil {
+export class TokenUtils {
     public generateToken = (payload: IPayload, expireIn: string = '30d',): string => {
         const signOptions: SignOptions = {
             issuer: process.env.ISSUER as string,
@@ -15,7 +15,7 @@ export class TokenUtil {
           return `Bearer ${token}`;
     }
 
-    public async verifyToken (token: string, ignoreExpiration: boolean = false): Promise<JwtPayload | Jwt | string> {
+    public static async verifyToken (token: string, ignoreExpiration: boolean = false): Promise<JwtPayload | Jwt | string> {
         const verifyOptions: VerifyOptions = {
             issuer: process.env.ISSUER as string,
             jwtid: process.env.JWT_ID as string,

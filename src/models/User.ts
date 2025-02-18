@@ -31,3 +31,8 @@ export const createUser = async (roles: string, name: string, companyName: strin
   );
   return result.rows[0];
 };
+
+export const getUserManagementDetails = async () => {
+  const result = await query('SELECT * FROM auth.users');
+  return result.rows[0];
+};
