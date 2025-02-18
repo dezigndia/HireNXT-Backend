@@ -24,7 +24,7 @@ export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextF
             console.log("test");
             const user: any = await new TokenUtils().verifyToken(token);
             // req.user = await AuthMiddleware._authUtil.getUserDetail(user.id);
-            //req.user = user;
+            req.user = user;
             next();
         }
         throw new NotFoundError('Not a authorized user');
