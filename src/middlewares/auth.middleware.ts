@@ -5,9 +5,9 @@ import { TokenUtil } from "@utils";
 import { Device, UserRole } from "core/enum-types";
 import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { PostgreSQLUserRepository } from "repositories";
+import { UserRepository } from "@repository";
 
-const _userRepo = new PostgreSQLUserRepository();
+const _userRepo = new UserRepository('auth.users');
 
 export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextFunction) => {
     try {
@@ -22,9 +22,9 @@ export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextF
                 throw new Error('not_authroized_token');
             }
 
-            const user = await TokenUtil.verifyToken(token);
+            const user: any = await new TokenUtil().verifyToken(token);
             // req.user = await AuthMiddleware._authUtil.getUserDetail(user.id);
-            // req.user = user;
+            req.user = user;
             next();
         }
         throw new NotFoundError('Not a authorized user');
@@ -38,7 +38,7 @@ export const allowedRole = (allowedRole: UserRole[]) => {
     const isAllowed = (role: UserRole) => allowedRole.includes(role);
     return async (req: IAuthRequest, res: Response, next: NextFunction) => {
         try {
-            const user = await _userRepo.getUserById(req.user.id);
+            const user = await _userRepo.getUser( "id", req.user.id);
             if(user && isAllowed(user.role)) {
                 next();
             } else {

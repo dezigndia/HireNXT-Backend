@@ -32,8 +32,8 @@
     "paths": {
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
-      "@repository": ["repository"],
-      "@repository/*": ["repository/*"],
+      "@repository": ["repositories"],
+      "@repository/*": ["repositories/*"],
       "@middlewares": ["middlewares"],
       "@middlewares/*": ["middlewares/*"],
       "@models": ["models"],
