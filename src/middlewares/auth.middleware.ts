@@ -1,13 +1,13 @@
 /* eslint-disable no-magic-numbers */
 import { IAuthRequest } from "@models";
 import { NotFoundError } from "@models";
-import { TokenUtil } from "@utils";
+import { TokenUtils } from "@utils";
 import { Device, UserRole } from "core/enum-types";
 import { NextFunction, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { UserRepository } from "@repository";
+import { UserRepository } from "repositories/user.repository";
 
-const _userRepo = new UserRepository('auth.users');
+const _userRepo = new UserRepository("auth.users");
 
 export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextFunction) => {
     try {
@@ -22,7 +22,7 @@ export const isAuthorized = async (req: IAuthRequest, res: Response, next: NextF
                 throw new Error('not_authroized_token');
             }
             console.log("test");
-            const user: any = await new TokenUtil().verifyToken(token);
+            const user: any = await new TokenUtils().verifyToken(token);
             // req.user = await AuthMiddleware._authUtil.getUserDetail(user.id);
             req.user = user;
             next();

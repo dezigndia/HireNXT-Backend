@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {login,createUser,addUser}  from '../controllers/authController';
+import {login,createUser,addUser, getUser}  from '../controllers/authController';
 
 const API_ROUTE = Router();
 
@@ -18,6 +18,9 @@ API_ROUTE.post('/create-user', (req, res) => {
 
 API_ROUTE.post('/user-management', (req, res) => {
     addUser(req, res);
+});
+API_ROUTE.post('/get-user-management', (req, res) => {
+    getUser(req, res);
 });
 
 export default API_ROUTE;
