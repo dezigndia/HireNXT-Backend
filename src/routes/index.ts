@@ -16,7 +16,7 @@ API_ROUTE.post('/create-user', (req, res) => {
     createUser(req, res);
 });
 
-API_ROUTE.post('/user-management', (req, res) => {
+API_ROUTE.post('/add-user-management', (req, res) => {
     addUser(req, res);
 });
 API_ROUTE.post('/get-user-management', (req, res) => {

@@ -1,8 +1,34 @@
-{
-    "name": "VirMall Rest API documentation",
+[
+  { "name": "VirMall Rest API documentation",
     "version": "1.0.0",
     "description": "Containes virmall rest api path",
     "title": "VirMall",
-    "url" : "http://localhost:3000",
+    "url" : "http://localhost:4000",
     "showRequiredLabels": true
-  }
+},
+{
+  "name": "Login",
+  "version": "1.0.0",
+  "description": "This API send email and password to backend and check for login details also create JWT session",
+  "title": "VirMall",
+  "url" : "http://localhost:4000/login",
+  "showRequiredLabels": true
+},
+{
+  "name": "Add users in user-management",
+  "version": "1.0.0",
+  "description": "This API add user details for Admin, Partner and Customer in Database for usermanagement screen",
+  "title": "VirMall",
+  "url" : "http://localhost:4000/add-user-management",
+  "showRequiredLabels": true
+},
+{
+  "name": "Get users for user-management",
+  "version": "1.0.0",
+  "description": "This API gets user details for Admin, Partner and Customer from Database and show in usermanagement screen",
+  "title": "VirMall",
+  "url" : "http://localhost:4000/get-user-management",
+  "showRequiredLabels": true
+}
+  ]
+  
