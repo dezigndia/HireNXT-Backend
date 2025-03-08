@@ -24,10 +24,12 @@ export const loginUser = async (name: string, password: string) => {
   return { token };
 };
 
-export const create = async (roles: string, name: string, companyName: string, email: string, contactNo: string, password: string) => {
+export const create = async (roles: string, name: string, company: string, email: string, contactNo: string, password: string) => {
   try{
   const hashedPassword = await bcrypt.hash(password, 10);
-  const response = await createUser(roles, name, companyName, email, contactNo, hashedPassword);
+  if(company === undefined)
+    company = "Dezigndia Technologies Pvt Ltd";
+  const response = await createUser(roles, name, company, email, contactNo, hashedPassword);
   return response;
   }catch (error) {
     return error;

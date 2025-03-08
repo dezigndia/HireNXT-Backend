@@ -7,7 +7,15 @@ API_ROUTE.get('/', (req, res) => {
        res.send('Hello from user routes!');
    });
  
-
+/**
+ * @api {get} /login/{"email":"sripadbal@gmail.com","password":"1234"} Request User information
+ * @apiName LoginUser
+ * @apiGroup User
+ *
+ * @apiParam {req} request User's unique ID.
+ *
+ * @apiSuccess {String} JWT Token of the User.
+ */
 API_ROUTE.post('/login', (req, res) => {
     login(req, res);
 });
