@@ -1,5 +1,5 @@
 import { Device, UserRole } from "core/enum-types";
-import { query } from '../config/database';
+import { query, selectQuery } from '../config/database';
 
 export interface IUser {
     id: number;
@@ -20,19 +20,19 @@ export interface IPayload {
 
 
 export const findUserByUsername = async (email: string) => {
-  const result = await query('SELECT * FROM auth.users WHERE email = $1', [email]);
+  const result = await selectQuery('SELECT * FROM auth.users WHERE email = $1', [email]);
   return result.rows[0];
 };
 
-export const createUser = async (roles: string, name: string, companyName: string, email: string, contactNo: string, password: string) => {
+export const createUser = async (roles: string, name: string, company: string, email: string, contact: string, password: string) => {
   const result = await query(
-    'INSERT INTO auth.users (roles, name, companyname, emails, contact, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, username',
-    [roles, name, companyName, email, contactNo, password]
+    'INSERT INTO auth.users (roles, name, company, email, contact, password, designation, created_on, modified_on) VALUES ($1, $2, $3, $4, $5, $6, $7, now(), now())',
+    [roles, name, company, email, contact, password, 'Sr Developer']
   );
-  return result.rows[0];
+  return result;
 };
 
 export const getUserManagementDetails = async () => {
-  const result = await query('SELECT * FROM auth.users');
-  return result.rows[0];
+  const result = await selectQuery('select name,email,contact,company as organization,designation,created_on as "createdOn",modified_on as "modifiedOn",roles as type from auth.users');
+  return result;
 };
