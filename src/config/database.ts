@@ -9,17 +9,27 @@ export const pool = new Pool({
     max: Number(process.env.MAX_POOL),
 });
 
-export const selectQuery = async (text: string, params?: any[]) => pool.query(text,params);
-
-export const query = async (text: string, params?: any[]) => {
+export const selectQuery = async (text: string, params?: any[]) => {
     try{
-        //const client = await pool.connect();    
-        const res = pool.query(text,params);
+        const client = await pool.connect();    
+        const res = client.query(text,params);
         return res;
     }
     catch(err){
         console.error('Error connecting to the database:', err);
-        return "";
+        throw err;
+    }
+}
+
+export const query = async (text: string, params?: any[]) => {
+    try{
+        const client = await pool.connect();    
+        const res = client.query(text,params);
+        return res;
+    }
+    catch(err){
+        console.error('Error connecting to the database:', err);
+        throw err;
     }
 
 };
