@@ -1,17 +1,16 @@
-import { IPayload, IUser } from "@models";
-import { Device } from "core/enum-types";
-import { Jwt, JwtPayload, SignOptions, VerifyOptions, sign, verify } from "jsonwebtoken";
+
+import { Jwt, JwtPayload, VerifyOptions, verify } from "jsonwebtoken";
 
 export class TokenUtils {
-    public generateToken = (payload: IPayload, expireIn: string = '30d',): string => {
-        const signOptions: SignOptions = {
-            issuer: process.env.ISSUER as string,
-            expiresIn: expireIn,
-            jwtid: process.env.JWT_ID as string,
-          };
+    public generateToken = ( expireIn: string = '30d',): string => {
+        // const signOptions: SignOptions = {
+        //     issuer: process.env.ISSUER as string,
+        //     expiresIn: expireIn,
+        //     jwtid: process.env.JWT_ID as string,
+        //   };
 
           const secret = process.env.JWT_ACCESS_SECRET as string;
-          const token = sign(payload, secret, signOptions);
+          const token = secret;//sign( secret, signOptions);
           return `Bearer ${token}`;
     }
 
@@ -26,14 +25,14 @@ export class TokenUtils {
         return tokenUser;
     }
 
-    public generatePayload(data: IUser, device: Device): IPayload {
-        const payload: IPayload = {
-            device: device,
-            email: data.email,
-            phone: data.phone,
-            role: data.role,
-            userId: data.id
-        };
-        return payload;
-    }
+    // public generatePayload(data: users, device: Device): IPayload {
+    //     const payload: IPayload = {
+    //         device: device,
+    //         // email: data.email,
+    //         // phone: data.phone,
+    //         // role: data.role,
+    //         // userId: data.id
+    //     };
+    //     return payload;
+    // }
 }
