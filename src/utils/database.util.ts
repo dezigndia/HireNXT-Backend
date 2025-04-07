@@ -1,4 +1,4 @@
-import { query, selectQuery } from '../config/database';
+import { selectQuery } from '../config/database';
 
 export class databaseUtil {
     public getDropDownValues = async () => {

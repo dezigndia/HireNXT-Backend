@@ -35,7 +35,7 @@ public getUser = async (req: Request, res: Response) => {
     const response = await this.user.getUserManagementDetails();
     return res.json({ "Response" : response.rows });
   } catch (err) {
-    return res.status(400).json({ error: 'server was unable to process a request due to a client ' + err });
+    return res.status(400).json({ error: 'server was unable to process request due to a client ' + err });
   }
 };
 
