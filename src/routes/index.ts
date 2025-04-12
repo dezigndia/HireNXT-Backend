@@ -21,6 +21,7 @@ API_ROUTE.post('/add-talents-profiles', (req, res) => {
     talent.addDatails(req, res);
 });
 API_ROUTE.post('/file-upload', (req, res) => {
+ //This is Upload Route
     upload.uploadFile(req, res);
 });
 
