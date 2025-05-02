@@ -14,7 +14,7 @@ export class TokenUtils {
           return `Bearer ${token}`;
     }
 
-    public static async verifyToken (token: string, ignoreExpiration: boolean = false): Promise<JwtPayload | Jwt | string> {
+    public async verifyToken (token: string, ignoreExpiration: boolean = false): Promise<JwtPayload | Jwt | string> {
         const verifyOptions: VerifyOptions = {
             issuer: process.env.ISSUER as string,
             jwtid: process.env.JWT_ID as string,
