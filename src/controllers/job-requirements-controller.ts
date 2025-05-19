@@ -4,7 +4,7 @@ import { databaseUtil } from '@utils/database.util';
 
 
 
-export class talentProfileController {
+export class jobrequirementsController {
 
     public constructor() {}
     public upload = new fileUpload();
