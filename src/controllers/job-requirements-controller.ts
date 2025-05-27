@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { fileUpload } from '@utils/fileUpload';
 import { databaseUtil } from '@utils/database.util';
-
+import { query } from 'config/database';
 
 
 export class jobrequirementsController {
@@ -12,15 +12,47 @@ export class jobrequirementsController {
 
     public addDatails = async (req: Request, res: Response) => {
       try{
-        const { name, role, email, contact, skills, experienceMonths, rate, experienceYears, notice, organization, location} = JSON.parse(req.body.data);
-        const userId = name+"_"+Date.now();
-        const fileNames = await this.upload.uploadFile(req, res, userId);
-        const { Aadhar,resume,pan,degree} = JSON.parse(fileNames.toString());
-        
-          const response = await this.databaseUtil.addTalentProfile(userId, name, role, email, contact, skills, experienceMonths, rate, experienceYears, notice, organization, location, Aadhar, resume, pan, degree);
-          res.json({ "Response" : response });
+        const body = req.body;
+        const values = [
+          body.role,
+          body.minExp,
+          body.maxExp,
+          JSON.stringify(body.primarySkills),
+          JSON.stringify(body.secondarySkills),
+          body.budget,
+          body.location,
+          body.engagementMonths,
+          body.engagementType,
+          body.requirementCount,
+          body.startDate,
+          body.expectations,
+          body.communication,
+          body.workingHours,
+          JSON.stringify(body.availability),
+          body.travel,
+          body.tools,
+          body.device,
+          body.responsibilities,
+          body.experienceRange
+        ];
+
+        const sql = `
+        INSERT INTO job.job_requests (
+          role, min_exp, max_exp, primary_skills, secondary_skills,
+          budget, location, engagement_months, engagement_type,
+          requirement_count, start_date, expectations, communication,
+          working_hours, availability, travel, tools, device,
+          responsibilities, experience_range
+        ) VALUES (
+          $1, $2, $3, $4, $5,
+          $6, $7, $8, $9,
+          $10, $11, $12, $13,
+          $14, $15, $16, $17, $18,
+          $19, $20
+        )`;
+        await query(sql, values);
         } catch (error) {
-          res.status(400).json({ error: 'server was unable to process a request due to a client error' });
+          res.status(400).json({ error: 'server was unable to process a request due to a client errorsa' });
         }
       };
 
