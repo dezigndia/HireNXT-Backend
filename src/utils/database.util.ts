@@ -14,7 +14,7 @@ export class databaseUtil {
     }
     public getTalentProfileDetails = async () => {
         try{
-          const result = await selectQuery('select name,email,contact,company as organization,designation,created_on as "createdOn",modified_on as "modifiedOn",roles as type from auth.users');
+          const result = await selectQuery('name, email, contact,organization, concact(experienceYears, \'Years\', experienceMonths,\'Months\'), rate, created_on, Aadhar, resume, pan, degree from talent.talent_profile');
           return result;
       } catch(err){
         throw err;
