@@ -29,7 +29,7 @@ API_ROUTE.post('/get-job-requirements', (req, res) => {
 API_ROUTE.post('/add-talents-profiles', fileUploads.fields([{ name: 'resume' }, { name: 'Aadhar' }, { name: 'pan' }, { name: 'degree' }]), (req, res) => {
     talent.addDatails(req,res);
 });
-API_ROUTE.post('/get-talents-profiles', fileUploads.fields([{ name: 'resume' }, { name: 'Aadhar' }, { name: 'pan' }, { name: 'degree' }]), (req, res) => {
+API_ROUTE.post('/get-talents-profiles', (req, res) => {
     talent.getData(req,res);
 });
 

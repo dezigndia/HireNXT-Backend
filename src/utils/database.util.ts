@@ -14,7 +14,15 @@ export class databaseUtil {
     }
     public getTalentProfileDetails = async () => {
         try{
-          const result = await selectQuery('name, email, contact,organization, concact(experienceYears, \'Years\', experienceMonths,\'Months\'), rate, created_on, Aadhar, resume, pan, degree from talent.talent_profile');
+          const result = await selectQuery('select name,organization, concat(experienceYears, \'Years\', experienceMonths,\'Months\') as experience, rate, \'aadhar\' as aadhar, \'resume\' as resume, \'pan\' as pan, \'degree\' as degree, \'Active Resource\' as type from talent.talent_profile');
+          return result;
+      } catch(err){
+        throw err;
+      }
+      };
+      public getJobRequirementsDetails = async () => {
+        try{
+          const result = await selectQuery('SELECT id, "role", min_exp, max_exp, primary_skills, secondary_skills, budget, "location", engagement_months, engagement_type, requirement_count, start_date, expectations, communication, working_hours, availability, travel, tools, device, responsibilities, experience_range FROM job.job_requests;');
           return result;
       } catch(err){
         throw err;
