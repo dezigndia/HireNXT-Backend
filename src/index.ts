@@ -8,4 +8,4 @@ if (!port && isNaN(port)) {
   console.error("❌ Invalid port number! Falling back to 3000.");
 }
 
-new RestServer().startServer(port, process.env.ENV || 'development');
+new RestServer().startServer(3000, process.env.ENV || 'development');
