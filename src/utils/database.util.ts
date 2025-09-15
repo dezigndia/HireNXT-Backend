@@ -22,8 +22,14 @@ export class databaseUtil {
       };
       public getJobRequirementsDetails = async () => {
         try{
-          const result = await selectQuery('SELECT id, "role", min_exp, max_exp, primary_skills, secondary_skills, budget, "location", engagement_months, engagement_type, requirement_count, start_date, expectations, communication, working_hours, availability, travel, tools, device, responsibilities, experience_range FROM job.job_requests;');
-          return result;
+          //const result = await selectQuery('SELECT id,"role","location",engagement_type,requirement_count,min_exp, engagement_months, start_date,budget,created_on FROM job.job_requests;');
+          const result = await selectQuery('SELECT id, "role" as title, \'deloitte\' as company, \'Software Company\' as "companyType", "role" as designation, min_exp as experience, max_exp, primary_skills as skills, primary_skills as "primarySkills", secondary_skills as "goodToHaveSkills", budget as salary, "location", engagement_months as "projectDuration", engagement_type as "employmentType", requirement_count as "openPositions", start_date as "startDate", expectations as interested, communication, working_hours as "workTime", availability, travel, tools, device as "systemProvided", responsibilities as descriptionPoints,\'IST\' as "timeZone", experience_range, created_on FROM job.job_requests;');
+          const formatted = result.rows.map(row => ({
+            ...row,
+            primarySkills: row.primarySkills.map((s: { skill: any; }) => s.skill),
+            skills: row.skills.map((s: { skill: any; }) => s.skill),
+          }));
+          return formatted;
       } catch(err){
         throw err;
       }
