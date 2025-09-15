@@ -19,15 +19,15 @@ export class jobrequirementsController {
           body.maxExp,
           JSON.stringify(body.primarySkills),
           JSON.stringify(body.secondarySkills),
-          body.budget,
+          body.budget.toString(),
           body.location,
-          body.engagementMonths,
+          body.engagementMonths.toString(),
           body.engagementType,
-          body.requirementCount,
+          body.requirementCount.toString(),
           body.startDate,
           body.expectations,
           body.communication,
-          body.workingHours,
+          body.workingHours.toString(),
           JSON.stringify(body.availability),
           body.travel,
           body.tools,
@@ -42,13 +42,13 @@ export class jobrequirementsController {
           budget, location, engagement_months, engagement_type,
           requirement_count, start_date, expectations, communication,
           working_hours, availability, travel, tools, device,
-          responsibilities, experience_range
+          responsibilities, experience_range, created_on
         ) VALUES (
           $1, $2, $3, $4, $5,
           $6, $7, $8, $9,
           $10, $11, $12, $13,
           $14, $15, $16, $17, $18,
-          $19, $20
+          $19, $20, now()
         )`;
         await query(sql, values);
         } catch (error) {
@@ -58,8 +58,8 @@ export class jobrequirementsController {
 
       public getData = async (req: Request, res: Response) => {
         try {
-          const response = await this.databaseUtil.getTalentProfileDetails();
-          return res.json({ "Response" : response.rows });
+          const response = await this.databaseUtil.getJobRequirementsDetails();
+          return res.json({ "Response" : response });
         } catch (err) {
           return res.status(400).json({ error: 'server was unable to process request due to a client ' + err });
         }
