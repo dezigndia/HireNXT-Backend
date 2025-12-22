@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {authController}  from '../controllers/authController';
-import { talentProfileController } from '@controllers/talents-profile-controller';
+import { talentProfileController } from '@controllers/talents-controller';
 import multer from 'multer';
 import { jobrequirementsController } from '@controllers/job-requirements-controller';
 
@@ -26,10 +26,10 @@ API_ROUTE.post('/add-job-requirements', (req, res) => {
 API_ROUTE.post('/get-job-requirements', (req, res) => {
     requirement.getData(req, res);
 });
-API_ROUTE.post('/add-talents-profiles', fileUploads.fields([{ name: 'resume' }, { name: 'Aadhar' }, { name: 'pan' }, { name: 'degree' }]), (req, res) => {
+API_ROUTE.post('/add-talents-pool', fileUploads.fields([{ name: 'resume' }, { name: 'Aadhar' }, { name: 'pan' }, { name: 'degree' }]), (req, res) => {
     talent.addDatails(req,res);
 });
-API_ROUTE.post('/get-talents-profiles', (req, res) => {
+API_ROUTE.post('/get-talents-pool', (req, res) => {
     talent.getData(req,res);
 });
 

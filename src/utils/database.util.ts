@@ -12,7 +12,7 @@ export class databaseUtil {
         );
         return result;
     }
-    public getTalentProfileDetails = async () => {
+    public getTalentPoolDetails = async () => {
         try{
           const result = await selectQuery('select name,organization, concat(experienceYears, \'Years\', experienceMonths,\'Months\') as experience, rate, \'aadhar\' as aadhar, \'resume\' as resume, \'pan\' as pan, \'degree\' as degree, \'Active Resource\' as type from talent.talent_profile');
           return result;

@@ -32,7 +32,7 @@ export class RestServer {
           'device'
         ],
         methods: 'GET,HEAD,OPTIONS,PUT,POST,DELETE',
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:5001"],
         preflightContinue: false,
         optionsSuccessStatus: 200,
         credentials: true

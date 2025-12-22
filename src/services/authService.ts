@@ -11,20 +11,21 @@ public user = new users();
 
 public loginUser = async (name: string, password: string) => {
   try{
-    const user = await this.user.findUserByUsername(name);
-    if (!user) {
+    const data = await this.user.findUserByUsername(name);
+    if (!data) {
       throw new Error('user with this email not found');
     }
     // Compare the password using bcrypt
-    const isMatch = await bcrypt.compare(password, user.rows[0].password);
+    const isMatch = await bcrypt.compare(password, data.rows[0].password);
     if (!isMatch) {
       throw new Error('Invalid credentials');
     }
     const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
-    const token = jwt.sign({ userId: user.rows[0].id, email: user.rows[0].email }, JWT_SECRET!, {
+    const token = jwt.sign({ userId: data.rows[0].id, email: data.rows[0].email }, JWT_SECRET!, {
       expiresIn: JWT_EXPIRES_IN,
     });
-    return { token };
+    const user = data.rows[0];
+    return { token,user };
 } catch(err){
   throw err;
 }

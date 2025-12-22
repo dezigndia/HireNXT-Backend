@@ -12,10 +12,10 @@ public login = async (req: Request, res: Response) => {
 
   try {
       console.log(email+" "+password)
-      const { token } = await this.authservice.loginUser(email, password);
-      res.json({ token });
+      const { token,user } = await this.authservice.loginUser(email, password);
+      res.json({ token,user });
   } catch (err) {
-    res.status(400).json({ error: 'server was unable to process a request due to a client '+ err });
+    res.status(400).json({ error: 'server was unable to process a rpequest due to a client '+ err });
   }
 };
 

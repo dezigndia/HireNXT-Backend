@@ -26,7 +26,7 @@ export class talentProfileController {
 
       public getData = async (req: Request, res: Response) => {
         try {
-          const response = await this.databaseUtil.getTalentProfileDetails();
+          const response = await this.databaseUtil.getTalentPoolDetails();
           return res.json({ "Response" : response.rows });
         } catch (err) {
           return res.status(400).json({ error: 'server was unable to process request due to a client ' + err });
